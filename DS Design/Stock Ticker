@@ -1,0 +1,32 @@
+Give a stream of stock prices, design a data structure to support the following operations:
+
+StockSticker(int k) Initialize the size of the ticker.
+void addOrUpdate(String stock, double price) add or update the price of a stock to the data structure.
+List<Map.Entry<String, double>> top() return the top k price stocks and their current prices
+
+
+unordered_map<string, multimap<double, string>::iterator> map1
+multimap<double, string> map2
+
+For initialization, we just need to record value k, so it's O(1).
+For AddorUpdate, it's O(lgn) as follows:
+
+void AddorUpdate(string stock, double price) {
+    if (map1.find(stock) == map1.end()) { // a new stock
+        map1[stock] = map2.insert(make_pair(price, stock));
+    }
+    else {
+        auto it = map1[stock];
+        if (price == it->first) // same price
+            return;
+        map2.erase(it);
+        map1[stock] = map2.insert(make_pair(price, stock));
+    }
+}
+For top(), it's O(k):
+
+void top(void) {
+    auto it = map2.rbegin();
+    for (int i=0; i<K && it != map2.rend(); it++, i++)
+        cout << it->second << ", " << it->first << endl;
+}
