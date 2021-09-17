@@ -1,3 +1,7 @@
+From example graph, we can see that this is Shortest path problem/Minimum spanning tree problem. In this problem, 
+in a graph, view cities as nodes, pipe connects two cities as edges with cost. here, wells costs, it is self connected edge,
+we can add extra node as root node 0, and connect all 0 and i with costs wells[i]. So that we can have one graph/tree, 
+and how to get minimun spanning trees / shortest path problem in a graph. Please see below detailed steps for analysis.
 class Solution {
 public:
     // runtime O(NlogN), space O(N)
