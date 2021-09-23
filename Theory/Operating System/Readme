@@ -1,0 +1,164 @@
+# OS:
+Operating System (OS) is basically a software program that manages and handles all resources of a computer such as hardware and software.
+The first OS was introduced in the early 1950s known as GMOs. An OS is responsible for managing, handling, 
+and coordinating overall activities and sharing of computer resources.
+It acts as an intermediary among users of computer and computer hardware. 
+
+# PROCESS VS THREAD
+Process: It is basically a program that is currently under execution by one or more threads. It is a very important part of the modern-day OS.
+It is a computer program that is under execution.
+These are heavy-weight operators.	
+It has its own memory space.	    
+It is more difficult to create a process as compared to creating a thread.
+It requires more resources as compared to thread.
+It can be divided into multiple threads.	       
+Thread: It is a path of execution that is composed of the program counter, thread id, stack, and set of registers within the process.
+It is the component or entity of the process that is the smallest execution unit.
+These are lightweight operators.
+It uses the memory of the process they belong to.
+It is easier to create a thread as compared to creating a process.
+It requires fewer resources as compared to processes.
+It can’t be further subdivided.
+
+## User Level thread (ULT) –
+Is implemented in the user level library, they are not created using the system calls. Thread switching does not need to call OS and to cause interrupt to Kernel. Kernel doesn’t know about the user level thread and manages them as if they were single-threaded processes.
+Advantages of ULT –
+Can be implemented on an OS that does’t support multithreading.
+Simple representation since thread has only program counter, register set, stack space.
+Simple to create since no intervention of kernel.
+Thread switching is fast since no OS calls need to be made.
+Disadvantages of ULT –
+No or less co-ordination among the threads and Kernel.
+If one thread causes a page fault, the entire process blocks.
+
+## Kernel Level Thread (KLT) –
+Kernel knows and manages the threads. Instead of thread table in each process, the kernel itself has thread table (a master one) that keeps track of all the threads in the system. In addition kernel also maintains the traditional process table to keep track of the processes. OS kernel provides system call to create and manage threads.
+Advantages of KLT –
+Since kernel has full knowledge about the threads in the system, scheduler may decide to give more time to processes having large number of threads.
+Good for applications that frequently block.
+Disadvantages of KLT –
+Slow and inefficient.
+It requires thread control block so it is an overhead.
+Summary:
+Each ULT has a process that keeps track of the thread using the Thread table.
+Each KLT has Thread Table (TCB) as well as the Process Table (PCB).
+
+Functions of Kernel:
+
+It is responsible for managing all computer resources such as CPU, memory, files, processes, etc.
+It facilitates or initiates the interaction between components of hardware and software.
+It manages RAM memory so that all running processes and programs can work effectively and efficiently.
+It also controls and manages all primary tasks of the OS as well as manages access and use of various peripherals connected to the computer.
+It schedules the work done by the CPU so that the work of each user is executed as efficiently as possible.
+33. What are different types of Kernel?
+There are basically five types of Kernels as given below:
+
+Monolithic Kernel
+MicroKernel
+Hybrid Kernel 
+Nano Kernel
+Exo Kernel
+
+      Kernel	                                            OS
+It is considered a central component of OS	  It is considered system software.
+It is generally responsible for converting user commands into machine-level commands. 	It is generally responsible for managing the resources of system.
+It simply acts as an interface between hardware and applications. 	It simply acts as an interface between hardware and user.
+It also performs functions like process management, file management, device management, I/O communication, etc. 	It also performs functions like providing security to data and files in the the system, providing access controls to users, maintaining the system privacy, etc.
+Its type includes Microkernel, Monolithic kernel, etc.        	Its type includes Single and Multiprogramming batch systems, Distributed OS, Real-time OS.
+
+MicroKernel: It is a minimal OS that executes only important functions of OS. It only contains a near-minimum number of features and functions that are required to implement OS. 
+Example: QNX, Mac OS X, K42, etc.
+
+Monolithic Kernel: It is an OS architecture that supports all basic features of computer components such as resource management, memory, file, etc. 
+Example: Solaris, DOS, OpenVMS, Linux, etc. 
+
+      MicroKernel                                                                 	Monolithic Kernel
+In this software or program, kernel services and user services are present in different address spaces.	In this software or program, kernel services and user services are usually present in the same address space.
+It is smaller in size as compared to the monolithic kernel.	It is larger in size as compared to a microkernel.
+It is easily extendible as compared to a monolithic kernel.	It is hard to as extend as compared to a microkernel.
+If a service crashes, it does affect on working of the microkernel.	If a service crashes, the whole system crashes in a monolithic kernel.
+It uses message queues to achieve inter-process communication.	It uses signals and sockets to achieve inter-process communication.
+
+What is a deadlock in OS? What are the necessary conditions for a deadlock?
+Deadlock is generally a situation where a set of processes are blocked as each process is holding resources and waits to acquire resources held by another process. In this situation, two or more processes simply try to execute simultaneously and wait for each to finish their execution because they are dependent on each other. We can see a hand problem in our system whenever a deadlock occurs in a program. It is one of the common problems you can see in multiprocessing. 
+Necessary Conditions for Deadlock
+There are basically four necessary conditions for deadlock as given below:
+Mutual Exclusion
+Hold and Wait
+No Pre-emption
+Circular Wait or Resource Wait
+
+What do you mean by Belady’s Anomaly?
+In the Operating System, process data is loaded in fixed-sized chunks and each chunk is referred to as a page. 
+The processor loads these pages in the fixed-sized chunks of memory called frames.
+Belady’s Anomaly is a phenomenon in which if we increase the number of frames in memory, then the number of page faults also increases. 
+It is generally experienced when we use FIFO (First in First out) page replacement algorithm. 
+
+What is spooling in OS?
+Spooling simply stands for Simultaneous peripheral operations online. 
+It is referred to as putting data of various I/O jobs in a buffer.
+Here, buffer means a special area in memory or hard disk that can be accessible to an I/O device.
+It is used for mediation between a computer application and a slow peripheral.
+It is very useful and important because devices access or acquire data at different rates. 
+This operation also uses disk as a very large buffer and is capable of overlapping I/O operations for one task with processor operations for another task.
+
+Explain zombie process?
+Zombie process, referred to as a defunct process, is basically a process that is terminated or completed 
+but the whole process control block is not cleaned up from the main memory because it still has an entry
+in the process table to report to its parent process. It does not consume any of the resources and is dead,
+but it still exists. It also shows that resources are held by process and are not free.
+
+
+When we use Priority Scheduling or Shortest Job First Scheduling, Starvation can happen, This algorithm is mostly used in CPU schedulers
+Starvation: It is generally a problem that usually occurs when a process has not been able to get the required resources
+it needs for progress with its execution for a long period of time. In this condition, low priority processes get blocked
+and only high priority processes proceed towards completion because of which low priority processes suffer from lack of resources. 
+
+Aging: It is a technique that is used to overcome the situation or problem of starvation. 
+It simply increases the priority of processes that wait in the system for resources for a long period of time.
+It is considered the best technique to resolve the problem of starvation as it adds an aging factor to the priority of
+each and every request by various processes for resources. It also ensures that low-level queue jobs or processes complete their execution. 
+
+Solution to Critical Section Problems
+Mutual Exclusion: Mutual exclusion implies that only one process can be inside the critical section at any time. If any other processes require the critical section, they must wait until it is free.
+Progress: Progress means that if a process is not using the critical section, then it should not stop any other process from accessing it. In other words, any process can enter a critical section if it is free.
+Bounded Waiting: Bounded waiting means that each process must have a limited waiting time. Itt should not wait endlessly to access the critical section.
+
+Peterson Solution : Peterson’s algorithm provides guaranteed mutual exclusion by using only the shared memory.
+It uses two ideas in the algorithm:
+Willingness to acquire lock.
+Turn to acquire lock.
+bool flag[n], int turn;
+The idea is that first a thread expresses its desire to acquire a lock and sets flag[self] = 1
+and then gives the other thread a chance to acquire the lock. If the thread desires to acquire the lock, 
+then, it gets the lock and passes the chance to the 1st thread. If it does not desire to get the lock then the while loop breaks and the 1st thread gets the chance.
+Test and Set
+Semaphore : Wait == P == -- 
+            Signal == V == ++
+          Binary Semaphore                                                                                                      Mutex 
+It allows various process threads to get the finite instance of the resource until resources are available.	It allows various process threads to get single shared resource only at a time.
+Its functions are based upon signaling mechanisms.	Its functions are based upon a locking mechanism.
+Binary semaphores are much faster as compared to Mutex.	Mutex is slower as compared to binary semaphores.
+It is basically an integer.	It is basically an object.
+
+What is virtual memory?
+It is a memory management technique feature of OS that creates the illusion to users of a very large (main) memory. 
+It is simply space where a greater number of programs can be stored by themselves in the form of pages.
+It enables us to increase the use of physical memory by using a disk and also allows us to have memory protection. 
+It can be managed in two common ways by OS i.e., paging and segmentation. It acts as temporary storage that can be used along with RAM for computer processes. 
+
+What do you mean by overlays in OS?
+Overlays is basically a programming method that divides processes into pieces so that instructions that are important and need can be saved in memory.
+It does not need any type of support from the OS. It can run programs that are bigger in size than physical memory by only keeping only important data
+and instructions that can be needed at any given time. 
+
+
+Demand paging is a method that loads pages into memory on demand. This method is mostly used in virtual memory. 
+In this, a page is only brought into memory when a location on that particular page is referenced during execution. 
+The following steps are generally followed:
+Attempt to access the page.
+If the page is valid (in memory) then continue processing instructions as normal.
+If a page is invalid then a page-fault trap occurs.
+Check if the memory reference is a valid reference to a location on secondary memory. If not, the process is terminated (illegal memory access). Otherwise, we have to page in the required page.
+Schedule disk operation to read the desired page into main memory.
+Restart the instruction that was interrupted by the operating system trap
