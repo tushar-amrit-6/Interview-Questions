@@ -1,0 +1,53 @@
+Normalization is a process of reducing redundancy by organizing the data into multiple tables. Normalization leads to better usage of disk spaces and makes it easier to maintain the integrity of the database.  
+Denormalization is the reverse process of normalization as it combines the tables which have been normalized into a single table so that data retrieval becomes faster. JOIN operation allows us to create a denormalized form of the data by reversing the normalization. 
+Database normalization is the process of organizing the attributes of the database to reduce or eliminate data redundancy (having the same data but at different places) 
+
+What is 2NF?
+2NF is the Second Normal Form. A table is said to be 2NF if it follows the following conditions:
+The table is in 1NF, i.e., firstly it is necessary that the table should follow the rules of 1NF.
+Every non-prime attribute is fully functionally dependent on the primary key, i.e., 
+every non-key attribute should be dependent on the primary key in such a way that if any key element is deleted, 
+then even the non_key element will still be saved in the database.
+
+What is 3NF?
+3NF stands for Third Normal Form. A database is called in 3NF if it satisfies the following conditions:
+It is in second normal form.
+There is no transitive functional dependency.
+For example: X->Z
+Where:
+X->Y
+Y does not -> X
+Y->Z so, X->Z
+
+What is BCNF?
+BCMF stands for Boyce-Codd Normal Form. It is an advanced version of 3NF, so it is also referred to as 3.5NF. BCNF is stricter than 3NF.
+A table complies with BCNF if it satisfies the following conditions:
+It is in 3NF.
+For every functional dependency X->Y, X should be the super key of the table. It merely means that X cannot be a non-prime attribute if Y is a prime attribute.
+
+Lossless join decomposition is a decomposition of a relation R into relations R1,R2 such that if we perform 
+natural join of two smaller relations it will return the original relation. This is effective  in removing
+redundancy from databases while preserving the original data..
+
+Deadlock Prevention Schemes based on Timestamp
+Wait_Die : An older transaction is allowed to wait for a younger transaction, whereas a younger transaction requesting an item held by an older transaction is aborted and restarted. 
+From the context above, if TS(Ti) < TS(Tj), then (Ti older than Tj) Ti is allowed to wait; otherwise abort Ti (Ti younger than Tj) and restart it later with the same timestamp.
+Wound_Wait : It is just the opposite of the Wait_Die technique. Here, a younger transaction is allowed to wait for an older one, whereas if an older transaction requests an item held by the younger transaction, we preempt the younger transaction by aborting it. 
+From the context above, if TS(Ti) < TS(Tj), then (Ti older than Tj) Tj is aborted (i.e., Ti wounds Tj) and restarts it later with the same Timestamp; otherwise (Ti younger than Tj) Ti is allowed to wait.
+
+
+A database lock is a mechanism to protect a shared piece of data from getting updated by two or more database users at the same time.
+When a single database user or session has acquired a lock then no other database user or session can modify that data until the lock is released.
+
+
+A schedule is called conflict serializable if it can be transformed into a serial schedule by swapping non-conflicting operations. Two operations are said to be conflicting if all conditions satisfy:
+They belong to different transactions
+They operate on the same data item
+At Least one of them is a write operation
+
+A Schedule is called view serializable if it is view equal to a serial schedule (no overlapping transactions).
+A conflict schedule is a view serializable but if the serializability contains blind writes, then the view serializable does not conflict serializable.
+
+Views in SQL are kind of virtual tables. A view also has rows and columns as they are in a real table in the database. 
+We can create a view by selecting fields from one or more tables present in the database. 
+A View can either have all the rows of a table or specific rows based on certain condition.
