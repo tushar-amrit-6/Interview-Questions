@@ -7,8 +7,8 @@ public:
         
         if(dp[l][r] != -1) return dp[l][r];
         
-        int ifleft = piles[l] + max(f(l+2, r, piles), f(l+1, r-1, piles));
-        int ifright = piles[r] + max(f(l+1, r-1, piles), f(l, r-2, piles));
+        int ifleft = piles[l] + min(f(l+2, r, piles), f(l+1, r-1, piles));
+        int ifright = piles[r] + min(f(l+1, r-1, piles), f(l, r-2, piles));
         
         return dp[l][r] = max(ifleft, ifright);
     }
