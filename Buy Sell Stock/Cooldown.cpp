@@ -1,35 +1,43 @@
 /************************************MEMORIZATION***************************************************/
 class Solution {
-    vector<int> mem;
-    
-    int findMax(vector<int>& prices,int curr,int n)
-    {
-        if(curr>=n)
-            return 0;
-        if(mem[curr]!=-1)
-            return mem[curr];
-        
-        //Now find all the positions where we can sell the stock
-        int maxVal = 0;
-        for(int i=curr+1;i<n;++i)
-            if(prices[curr]<prices[i])  //We can try to sell on ith day
-                //We have 2 choices
-                //1.We can sell the stock at ith day and findMax from (i+2)th day
-                //2.We don't sell the stock on ith day
-                maxVal = max(maxVal, prices[i]-prices[curr]+findMax(prices,i+2,n));
-        
-        maxVal = max(maxVal, findMax(prices,curr+1,n)); //Exclude current element
-        mem[curr] = maxVal;
-        return maxVal;
-    }
 public:
+
+    int dp[5005][3];
+    int solver(vector<int>& prices, int idx, int bought) {
+
+        if (idx >= prices.size()) {
+            return 0;
+        }
+        
+        if (dp[idx][bought] != -1) {
+            return dp[idx][bought]; 
+        }
+
+        int profitWithBuying, profitWithSelling, profitWithSkipping;
+        profitWithSkipping = profitWithSelling = profitWithBuying = 0;
+
+        profitWithSkipping = solver(prices, idx+1, bought);
+
+        if (bought) {
+
+            // already have purchased the stock
+            profitWithSelling = prices[idx] + solver(prices, idx+2, 1-bought);  
+        }
+        else {
+
+            // no stocks bought so buy it
+            profitWithBuying = solver(prices, idx+1, 1-bought) - prices[idx];
+        }
+
+        return dp[idx][bought] = max(profitWithSkipping, max(profitWithBuying, profitWithSelling));
+    }
+    
+
     int maxProfit(vector<int>& prices) {
-        int n=prices.size();
-        mem.resize(n+1,-1);
-        return findMax(prices,0,n);
+        memset(dp, -1, sizeof(dp));
+        return solver(prices, 0, 0);
     }
 };
-
 /************************************STATE MACHINE***************************************************/
 
 class Solution {
