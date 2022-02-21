@@ -1,3 +1,60 @@
+We will start travelling from the petrol pump situated at index 0.
+ 
+
+We will maintain a variable ‘sum’ (with an initial value equal to zero) which stores the difference between total petrol used and 
+	total distance travelled till a particular index starting from index 0.
+ 
+
+The index where the variable sum has the least value will be our answer because
+If the value of sum remains non-negative throughout the iteration, then index 0 will be our answer.
+The index where the value of sum is least (and it will be negative), let that index be y. Then y, cannot be reached starting from index (0,1,2,..., y-1).
+Hence it is optimal to make y as our starting point as there is at least one answer possible.
+In case there are several indexes with the minimum value, the lowest index will be our answer.
+	
+	
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& petrol, vector<int>& distance) {
+        int n=petrol.size();
+        long long int totalPetrol = 0;
+	long long int totalDistance = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		totalDistance += distance[i];
+
+		totalPetrol += petrol[i];
+	}
+
+	if (totalPetrol < totalDistance)
+		return -1;
+
+	long long int sum = 0;
+	long long int minimumSum =0;
+
+	int minimumSumIndex = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+
+		if (sum < minimumSum)
+		{
+			// Finding the index where sum has least value.
+			minimumSum = sum;
+			minimumSumIndex = i;
+		}
+		
+		// Updating sum with the required value.
+		sum += petrol[i] - distance[i];
+	}
+	return minimumSumIndex;
+    }
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 // C++ program to find circular tour for a truck 
 #include <bits/stdc++.h> 
 using namespace std; 
