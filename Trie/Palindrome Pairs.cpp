@@ -1,7 +1,8 @@
 struct TrieNode{
     TrieNode *children[26];
     int index;
-    TrieNode() : index(-1) {
+    TrieNode()  {
+        index = -1;
         for(int i = 0; i < 26; i++) {
             children[i] = NULL;
         }
